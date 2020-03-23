@@ -1,2 +1,7 @@
 bases:
   - ../../../base/leeroy-app
+
+secretGenerator:
+  - name: test-secret
+    literals:
+      - env=dev
