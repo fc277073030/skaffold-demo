@@ -31,5 +31,6 @@ spec:
       containers:
       - name: leeroy-app
         image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 50051

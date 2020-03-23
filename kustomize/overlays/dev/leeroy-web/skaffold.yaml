@@ -4,6 +4,8 @@ build:
   artifacts:
     - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-web
       context: ../../../../leeroy-web
+  tagPolicy:
+    gitCommit: {}
 deploy:
   kustomize:
     paths: ["../../../../kustomize/overlays/dev/leeroy-web"]

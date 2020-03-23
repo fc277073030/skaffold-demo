@@ -17,5 +17,6 @@ spec:
       containers:
         - name: leeroy-web
           image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-web
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
