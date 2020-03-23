@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+build:
+  artifacts:
+    - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-web
+      context: ../../../../leeroy-web
+deploy:
+  kustomize:
+    paths: ["../../../../kustomize/overlays/dev/leeroy-web"]
+#portForward:
+#  - resourceType: deployment
+#    resourceName: leeroy-web
+#    port: 8080
+#    localPort: 9000

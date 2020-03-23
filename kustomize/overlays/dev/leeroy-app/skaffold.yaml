@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+build:
+  artifacts:
+    - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
+      context: ../../../../leeroy-app
+  tagPolicy:
+    gitCommit: {}
+#      variant: CommitSha
+#    dateTime:
+#      format: "2006-01-02_15-04-05.999_MST"
+#      timezone: "Local"
+deploy:
+  kustomize:
+    paths: ["../../../../kustomize/overlays/dev/leeroy-app"]
+#portForward:
+#  - resourceType: deployment
+#    resourceName: leeroy-web
+#    port: 8080
+#    localPort: 9000
