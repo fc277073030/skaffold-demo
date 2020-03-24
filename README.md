@@ -37,3 +37,67 @@ Skaffold 支持以下工具：
 除上述步骤外，skaffold还将自动为您管理以下实用程序：
 - 使用以下命令将容器端口转发到本地计算机 kubectl port-forward
 - 汇总来自已部署Pod的所有日志
+
+#### 示例：
+项目地址:
+``` sh
+git clone https://gitlab.oifitech.com/fanchao/skaffold-demo.git
+```
+项目结构:
+``` sh
+ fanchao@fanchaodeMacBook-Pro  ~/go/src/skaffold-demo   master  tree .
+.
+├── README.md
+├── img
+│   └── architecture.png
+├── kustomize
+│   ├── base
+│   │   ├── leeroy-app
+│   │   │   ├── deployment.yaml
+│   │   │   └── kustomization.yaml
+│   │   └── leeroy-web
+│   │       ├── deployment.yaml
+│   │       └── kustomization.yaml
+│   └── overlays
+│       └── dev
+│           ├── kustomization.yaml
+│           ├── leeroy-app
+│           │   ├── kustomization.yaml
+│           │   └── skaffold.yaml
+│           └── leeroy-web
+│               ├── kustomization.yaml
+│               └── skaffold.yaml
+├── leeroy-app
+│   ├── Dockerfile
+│   └── app.go
+└── leeroy-web
+    ├── Dockerfile
+    └── web.go
+
+11 directories, 15 files
+```
+
+构建 leeroy-app 的 skaffold 配置，tag 镜像策略这里用的是 git commit, 部署工具用的是 kustomize。
+```yaml
+apiVersion: skaffold/v2beta1
+kind: Config
+build:
+  artifacts:
+    - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
+      context: ../../../../leeroy-app
+  tagPolicy:
+    gitCommit: 
+     variant: CommitSha
+deploy:
+  kustomize:
+    paths: ["../../../../kustomize/overlays/dev/leeroy-app"]
+```
+切换目录至 kustomize/overlays/dev/leeroy-app
+
+运行命令：
+```
+skaffold build     # 构建镜像
+skaffold deploy    # 部署至k8s
+skaffold run       # 构建镜像然后部署至k8s
+skaffold delete     # 删除部署
+```
