@@ -99,5 +99,7 @@ deploy:
 skaffold build     # 构建镜像
 skaffold deploy    # 部署至k8s
 skaffold run       # 构建镜像然后部署至k8s
-skaffold delete     # 删除部署
+skaffold delete    # 删除部署
 ```
+
+skaffold 详细配置说明地址： https://skaffold.dev/docs/references/yaml/
