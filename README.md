@@ -86,11 +86,19 @@ build:
     - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
       context: ../../../../leeroy-app
   tagPolicy:
-    gitCommit: 
-     variant: CommitSha
+    gitCommit:
+      variant: AbbrevCommitSha   # 使用缩写git commit sha
 deploy:
   kustomize:
     paths: ["../../../../kustomize/overlays/dev/leeroy-app"]
+```
+gitCommit是Skaffold的默认标记策略：如果您未tagPolicy在此build部分中指定字段，Skaffold将使用Git信息标记工件。
+
+skaffold将查看包含工件context目录和标记的Git工作区，并根据以下规则进行标记：
+
+* 如果工作区在Git标签上，则该标签用于标记镜像
+* 如果工作空间在Git提交上，则使用短提交
+* 如果工作空间中有未提交的更改，则将后缀 -dirty 附加到镜像标签
 ```
 切换目录至 kustomize/overlays/dev/leeroy-app
 

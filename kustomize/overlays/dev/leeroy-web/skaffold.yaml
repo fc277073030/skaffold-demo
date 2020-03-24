@@ -5,8 +5,8 @@ build:
     - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-web
       context: ../../../../leeroy-web
   tagPolicy:
-    gitCommit:
-      variant: AbbrevCommitSha   # 使用缩写 git commit sha
+    gitCommit: {}
+#      variant: AbbrevCommitSha   # 使用缩写 git commit sha
 deploy:
   kustomize:
     paths: ["../../../../kustomize/overlays/dev/leeroy-web"]
