@@ -99,16 +99,16 @@ skaffold将查看包含工件context目录和标记的Git工作区，并根据�
 * 如果工作区在Git标签上，则该标签用于标记镜像
 * 如果工作空间在Git提交上，则使用短提交
 * 如果工作空间中有未提交的更改，则将后缀 -dirty 附加到镜像标签
-```
+
 切换目录至 kustomize/overlays/dev/leeroy-app
 
 运行命令：
-```
+``` 
 skaffold dev       # 开发模式
 skaffold build     # 构建镜像
 skaffold deploy    # 部署至k8s
-skaffold run       # 构建镜像然后部署至k8s
+skaffold build -q | skaffold deploy --build-artifacts -  # 构建并部署
+skaffold run       # 构建并部署
 skaffold delete    # 删除部署
 ```
-
 skaffold 详细配置说明地址： https://skaffold.dev/docs/references/yaml/
