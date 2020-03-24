@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 
@@ -22,4 +23,5 @@ func main() {
 	log.Print("leeroy web server ready")
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
+	fmt.Println("ok")
 }

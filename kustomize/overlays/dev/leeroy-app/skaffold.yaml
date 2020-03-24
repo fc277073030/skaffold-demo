@@ -1,12 +1,32 @@
 apiVersion: skaffold/v2beta1
 kind: Config
-build:
-  artifacts:
-    - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
-      context: ../../../../leeroy-app
-  tagPolicy:
-    gitCommit: {}
-#      variant: AbbrevCommitSha   # 使用缩写git commit sha
-deploy:
-  kustomize:
-    paths: ["../../../../kustomize/overlays/dev/leeroy-app"]
+#build:
+#  artifacts:
+#    - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
+#      context: ../../../../leeroy-app
+#  tagPolicy:
+#    gitCommit: {}
+##      variant: AbbrevCommitSha   # 使用缩写git commit sha
+profiles:
+  - name: dev
+    build:
+      artifacts:
+        - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
+          context: ../../../../leeroy-app
+      tagPolicy:
+        gitCommit: {}
+    deploy:
+      kustomize:
+        paths: ["../../../../kustomize/overlays/dev/leeroy-app"]
+
+  - name: prod
+    build:
+      artifacts:
+        - image: registry.cn-hangzhou.aliyuncs.com/tekton-pipelines/leeroy-app
+          context: ../../../../leeroy-app
+      tagPolicy:
+        envTemplate:
+          template: "{{.IMAGE_NAME}}:{{.FOO}}"
+    deploy:
+      kustomize:
+        paths: ["../../../../kustomize/overlays/dev/leeroy-app"]
