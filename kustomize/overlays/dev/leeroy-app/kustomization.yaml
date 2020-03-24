@@ -5,3 +5,4 @@ secretGenerator:
   - name: test-secret
     literals:
       - env=dev
+      - app=qa

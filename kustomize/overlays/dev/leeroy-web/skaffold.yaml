@@ -6,7 +6,7 @@ build:
       context: ../../../../leeroy-web
   tagPolicy:
     gitCommit:
-      variant: CommitSha
+      variant: AbbrevCommitSha   # 使用缩写 git commit sha
 deploy:
   kustomize:
     paths: ["../../../../kustomize/overlays/dev/leeroy-web"]

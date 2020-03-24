@@ -96,6 +96,7 @@ deploy:
 
 运行命令：
 ```
+skaffold dev       # 开发模式
 skaffold build     # 构建镜像
 skaffold deploy    # 部署至k8s
 skaffold run       # 构建镜像然后部署至k8s
